@@ -43,13 +43,15 @@ body{
 }
 
 .anatomy_model>.marker{
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
     background-color: teal;
     border-radius: 50%;
     z-index: 12;
 
     border: 1px solid white;
+
+    transform: translate(-50%, -50%);
 
     display: flex;
     justify-content: center;
@@ -59,6 +61,7 @@ body{
     left: 0;
 
     transition: 0.3s linear;
+    transform-origin: left top;
 }
 
 .anatomy_model>.marked{
@@ -175,11 +178,24 @@ body{
         width: 100%;
         height: 55%;
 
+        padding-top: 10px;
+        padding-bottom: 30px;
+        row-gap: 10px;
+
         overflow: scroll;
     }
 
     .anatomy_pin .label_list .label{
-        font-size: 16px;
+        max-width: 150px;
+        font-size: 12px;
+        
+    }
+
+    .anatomy_model .marker{
+        scale:0.8;
+    }
+    .anatomy_model .marked{
+        scale:1;
     }
 
         /* width */
