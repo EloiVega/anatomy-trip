@@ -30,17 +30,32 @@
           elements.
      -->
     <div class = "modal anatomy_pin" id = "anatomy_pin_modal">
-        <!-- <div class="anatomy_model">
-            <img src="./ui/images/anatomy.png" alt="a figure of the human body anatomy with circle on top to indicate parts' positions">
-            <span class="marker"></span>
-            <span class="marker mark1 marked"></span>
-            <span class="marker mark2"></span>
-            <span class="marker mark3"></span>
-            <span class="marker mark4"></span>
-            <span class="marker mark5"></span>
-            <span class="marker mark6"></span>
-            <span class="marker mark7"></span>
-        </div> -->
+        <!-- 
+            Items are added dynamically using JavaScript,
+            template for creating the anatomy model:
+                $("#anatomy_pin_modal").append(`
+                    <div id="anatomy_model" class="anatomy_model">
+                        <img src="source of the image" alt="Alternative text that describes the model">
+                    </div>
+                `)
+
+            template for creating a single marker:
+                //First we construct the circles elements
+                    const id = removeWhiteSpaces("label");
+                    let element = `<span id = "${id}" class="marker"></span>`;
+                    $("#anatomy_model").append(`
+                        ${element}
+                    `);
+                    //Then we edit their HTML CSS to position them as we wish
+                    $(`#${id}`).css({
+                        top: `${"yPosition"}%`,
+                        left: `${"xPosition"}%`
+                    })
+                    //Then make it marked when clicked
+                    $(`#${id}`).click(() => {markTopic(currentIndex)});
+                });
+         -->
+
         <!-- <div class="label_list">
             <div class = "label">
                 Skin

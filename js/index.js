@@ -110,6 +110,7 @@ $(document).ready(function() {
     const scrollBlockHeight = 1048;
     const maximumScrollPosition = (size-1) * scrollBlockHeight;
     let markedPos = 0;
+    let timer; //Used to avoid timeout Loops
 
     // UTILITY FUNCTIONS //
     const removeWhiteSpaces = (str) => str.replace(/\s/g, "");
@@ -119,12 +120,22 @@ $(document).ready(function() {
         let id = removeWhiteSpaces(labels[markedPos].label);
         //unmark the previous markedPos
         $(`#${id}`).removeClass('marked');
+        $(`#${id}_label`).removeClass('marked_label');
         
         //update markedPos and mark the new marker
         markedPos = index;
         id = removeWhiteSpaces(labels[markedPos].label);
         $(`#${id}`).addClass('marked');
+        $(`#${id}_label`).addClass('marked_label');
 
+        const designatedScrollPosition = index * scrollBlockHeight;
+
+        isScrolling= false;
+        if(timer) clearTimeout(timer);
+        
+        isScrolling = true;
+        $('html, body').animate({scrollTop: designatedScrollPosition}, 700);
+        timer = setTimeout(()=>{isScrolling = false}, 800);
     }
 
     // SCROLLING LOGISTICS //
@@ -175,15 +186,34 @@ $(document).ready(function() {
         $(`#${id}`).click(() => {markTopic(currentIndex)});
     });
 
+    //-------------------------------------------------------------------------//
+    
     //Mark the marker at the markedPos position
     const markedId = removeWhiteSpaces(labels[markedPos].label);
     $(`#${markedId}`).addClass('marked');
-
+    
+    // Constructing the Labels' List
+    //first add the parent container of the list
+    $("#anatomy_pin_modal").append(`<div id="label_list" class="label_list"></div>`);
+    //then add each label
+    labels.forEach((topic, currentIndex) => {
+        const id = removeWhiteSpaces(topic.label);
+        $(`#label_list`).append(`
+        <div class = "label" id = "${id}_label">
+                ${topic.label}
+            </div>
+        `)
+        $(`#${id}_label`).click(()=>{markTopic(currentIndex)})
+    })
+    //Mark the label at the markedPos position
+    $(`#${markedId}_label`).addClass('marked_label');
+    
+    //-------------------------------------------------------------------------//
 
     // Constructing the Scroll-Blocks
     labels.forEach(topic => {
         $("#scroll_block_container").append(`
-            <div class="scrollblock" id="skin_container">
+        <div class="scrollblock" id="skin_container">
                 <div class = "filter topic_banner"></div>
                 <img class = "topic_banner" src="${topic.image_src}" alt="${topic.alt}">
             </div>
