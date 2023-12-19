@@ -1,0 +1,124 @@
+body{
+	margin: 0;
+    position: relative;
+    height: 100%;
+}
+
+.anatomy_pin_modal{
+    width: 95vw;
+    height: 70vh;
+    background-color: white;
+    border-radius: 10px;
+    /* box-shadow: 0px 0px 5px 1px black,0px 0px 10px 1px white,0px 0px 10px 2px skyblue; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    position:fixed;
+    top: 60vh;
+    left: 50vw;
+
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.anatomy_model{
+    width: 40%;
+    height: 100%;
+    
+    background-color:peru;
+}
+
+.anatomy_model>img{
+    width: 100%;
+    height: 100%;
+}
+
+.label_list{
+    width: 60%;
+    height: 100%;
+
+    background: teal;
+
+    display: grid;
+    grid-template-columns: 6fr 6fr 6fr;
+    grid-auto-flow: auto;
+}
+
+.label_list>.label{
+    align-self: center;
+    justify-self: center;
+}
+
+.scrollblock{
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100vw;
+    height: 1048px;
+
+    /* padding-top: 30px; */
+    /* margin-bottom: 100px; */
+}
+
+.scrollblock>.topic_banner{
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.scrollblock>.filter{
+    content: 'hello';
+    position: absolute;
+    z-index:2;
+    background-color: #0b3364;
+    filter:blur(350px);
+}
+
+@media(max-width: 600px){
+    .anatomy_pin_modal{
+        width: 95vw;
+        height: 95vh;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px 1px black,0px 0px 10px 1px white,0px 0px 10px 2px skyblue;
+    
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+        overflow: scroll;
+    
+        position:fixed;
+        top: 50vh;
+        left: 50vw;
+    
+        transform: translate(-50%, -50%);
+        z-index: 10;
+    }
+    .anatomy_pin_modal .anatomy_model{
+        width: 60%;
+        height: 40%;
+        
+        background-color:peru;
+    }
+    .anatomy_pin_modal .label_list{
+        width: 100%;
+        height: 60%;
+
+        overflow: scroll;
+    }
+
+    .anatomy_pin_modal .label_list .label{
+        font-size: 16px;
+    }
+}
