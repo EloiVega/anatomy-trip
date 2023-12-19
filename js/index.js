@@ -109,6 +109,23 @@ $(document).ready(function() {
     const size = labels.length;
     const scrollBlockHeight = 1048;
     const maximumScrollPosition = (size-1) * scrollBlockHeight;
+    let markedPos = 0;
+
+    // UTILITY FUNCTIONS //
+    const removeWhiteSpaces = (str) => str.replace(/\s/g, "");
+
+    // Marking and Unmarking Logic //
+    const markTopic = (index) => {
+        let id = removeWhiteSpaces(labels[markedPos].label);
+        //unmark the previous markedPos
+        $(`#${id}`).removeClass('marked');
+        
+        //update markedPos and mark the new marker
+        markedPos = index;
+        id = removeWhiteSpaces(labels[markedPos].label);
+        $(`#${id}`).addClass('marked');
+
+    }
 
     // SCROLLING LOGISTICS //
 
@@ -142,9 +159,9 @@ $(document).ready(function() {
             <img src="./ui/images/anatomy.png" alt="a figure of the human body anatomy with circle on top to indicate parts' positions">
         </div>
     `)
-    labels.forEach(topic => {
+    labels.forEach((topic, currentIndex) => {
         //First we construct the circles elements
-        const id = topic.label.replace(/\s/g, ""); //Removes all white spaces int label
+        const id = removeWhiteSpaces(topic.label);
         let element = `<span id = "${id}" class="marker"></span>`;
         $("#anatomy_model").append(`
             ${element}
@@ -154,7 +171,14 @@ $(document).ready(function() {
             top: `${topic.yPosition}%`,
             left: `${topic.xPosition}%`
         })
+        //Then make it marked when clicked
+        $(`#${id}`).click(() => {markTopic(currentIndex)});
     });
+
+    //Mark the marker at the markedPos position
+    const markedId = removeWhiteSpaces(labels[markedPos].label);
+    $(`#${markedId}`).addClass('marked');
+
 
     // Constructing the Scroll-Blocks
     labels.forEach(topic => {
