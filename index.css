@@ -19,17 +19,17 @@ body{
 
     position:fixed;
     top: 60vh;
-    left: 50vw;
+    left: 50%;
 
     transform: translate(-50%, -50%);
     z-index: 10;
+    
+    background: #dbe5ec;
 }
 
 .anatomy_model{
     width: 40%;
     height: 100%;
-    
-    background-color:peru;
 }
 
 .anatomy_model>img{
@@ -37,11 +37,46 @@ body{
     height: 100%;
 }
 
+.anatomy_model>.marker{
+    width: 35px;
+    height: 35px;
+    background-color: teal;
+    border-radius: 50%;
+    z-index: 11;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.anatomy_pin_modal>.anatomy_model>.mark1{
+    top: 10%;
+}
+.anatomy_pin_modal>.anatomy_model>.mark2{
+    top: 20%;
+}
+.anatomy_pin_modal>.anatomy_model>.mark3{
+    top: 30%;
+}
+.anatomy_pin_modal>.anatomy_model>.mark4{
+    top: 40%;
+}
+.anatomy_pin_modal>.anatomy_model>.mark5{
+    top: 50%;
+}
+.anatomy_pin_modal>.anatomy_model>.mark6{
+    top: 60%;
+}
+.anatomy_pin_modal>.anatomy_model>.mark7{
+    top: 70%;
+}
+
 .label_list{
     width: 60%;
     height: 100%;
-
-    background: teal;
 
     display: grid;
     grid-template-columns: 6fr 6fr 6fr;
@@ -51,6 +86,20 @@ body{
 .label_list>.label{
     align-self: center;
     justify-self: center;
+
+    width: 35%;
+    height: 50px;
+    border: 1px solid rgb(22, 37, 37);
+    border-radius: 10px;
+    background-color: rgb(63, 103, 103);
+
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .scrollblock{
@@ -65,8 +114,11 @@ body{
 }
 
 .scrollblock>.topic_banner{
-    width: 100%;
+    width: 100vw;
     height: 30%;
+
+    object-fit: cover;
+
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -85,8 +137,8 @@ body{
 
 @media(max-width: 600px){
     .anatomy_pin_modal{
-        width: 95vw;
-        height: 95vh;
+        width: 90vw;
+        height: 90vh;
         background-color: white;
         border-radius: 10px;
         box-shadow: 0px 0px 5px 1px black,0px 0px 10px 1px white,0px 0px 10px 2px skyblue;
@@ -95,30 +147,41 @@ body{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    
-        overflow: scroll;
-    
-        position:fixed;
-        top: 50vh;
-        left: 50vw;
-    
-        transform: translate(-50%, -50%);
         z-index: 10;
     }
     .anatomy_pin_modal .anatomy_model{
         width: 60%;
         height: 40%;
-        
-        background-color:peru;
+        margin-bottom: 5%;
     }
     .anatomy_pin_modal .label_list{
         width: 100%;
-        height: 60%;
+        height: 55%;
 
         overflow: scroll;
     }
 
     .anatomy_pin_modal .label_list .label{
         font-size: 16px;
+    }
+
+        /* width */
+    .anatomy_pin_modal .label_list::-webkit-scrollbar {
+        width: 3px;
+    }
+    
+    /* Track */
+    .anatomy_pin_modal .label_list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    /* Handle */
+    .anatomy_pin_modal .label_list::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+    
+    /* Handle on hover */
+    .anatomy_pin_modal .label_list::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 }
