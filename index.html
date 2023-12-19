@@ -16,19 +16,32 @@
 </head>
 <body>
 
-    <div class = "anatomy_pin_modal">
-        <div class="anatomy_model">
+    <!--
+        First is the anatomy_pin_modal which has
+        out figure alongside the labels' list
+
+        classes were separated as follows:
+        - The modal class is the class 
+          that have generic modal attributes.
+        - The anatomy_pin class is the class that
+          have customized attributes for our own
+          modal, This is the class that is used
+          to direct attributes for all the children
+          elements.
+     -->
+    <div class = "modal anatomy_pin" id = "anatomy_pin_modal">
+        <!-- <div class="anatomy_model">
             <img src="./ui/images/anatomy.png" alt="a figure of the human body anatomy with circle on top to indicate parts' positions">
-            <span class="marker">8</span>
-            <span class="marker mark1 marked">1</span>
-            <span class="marker mark2">2</span>
-            <span class="marker mark3">3</span>
-            <span class="marker mark4">4</span>
-            <span class="marker mark5">5</span>
-            <span class="marker mark6">6</span>
-            <span class="marker mark7">7</span>
-        </div>
-        <div class="label_list">
+            <span class="marker"></span>
+            <span class="marker mark1 marked"></span>
+            <span class="marker mark2"></span>
+            <span class="marker mark3"></span>
+            <span class="marker mark4"></span>
+            <span class="marker mark5"></span>
+            <span class="marker mark6"></span>
+            <span class="marker mark7"></span>
+        </div> -->
+        <!-- <div class="label_list">
             <div class = "label">
                 Skin
             </div>
@@ -89,60 +102,20 @@
             
             <div class = "label">
                 Skin
-            </div>
+            </div> -->
             
         </div>
     </div>
-
-    <div class="scrollblock" id="skin_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/skin.jpg" alt="An illustration of skin">
+    <div class="container" id="scroll_block_container">
+        <!-- 
+            Items are added dynamically using JavaScript,
+            template for creating an scrollblock:
+                <div class="scrollblock" id="skin_container">
+                    <div class = "filter topic_banner"></div>
+                    <img class = "topic_banner" src="${labels[position].image_src}" alt="${labels[position].alt}">
+                </div>
+         -->
     </div>
-    <div class="scrollblock" id="bones_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/skeleton.jpg" alt="An illustration of bones">
-    </div>
-    <div class="scrollblock" id="joints_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/joints.jpg" alt="An illustration of joints">
-    </div>
-    <div class="scrollblock" id="nerves_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/nerves.jpg" alt="An illustration of nerves">
-    </div>
-    <div class="scrollblock" id="teeth_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/teeth.jpg" alt="An illustration of teeth">
-    </div>
-    <div class="scrollblock" id="heart_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/heart.jpg" alt="An illustration of heart">
-    </div>
-    <div class="scrollblock" id="blood_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/blood.jpg" alt="An illustration of blood">
-    </div>
-    <div class="scrollblock" id="bonemarrow_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/bonemarrow.jpg" alt="An illustration of bonemarrow">
-    </div>
-    <div class="scrollblock" id="muscles_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/muscles.jpg" alt="An illustration of muscles">
-    </div>
-    <div class="scrollblock" id="retina_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/eye.jpg" alt="An illustration of retina">
-    </div>
-    <div class="scrollblock" id="thyroid_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/thyroid.jpg" alt="An illustration of thyroid">
-    </div>
-    <div class="scrollblock" id="kidneys_container">
-        <div class = "filter topic_banner"></div>
-        <img class = "topic_banner" src="./ui/images/kidney.jpg" alt="An illustration of kidneys">
-    </div>
-
     <!-- Function of the project -->
     <script src = "./js/index.js"></script>
 </body>

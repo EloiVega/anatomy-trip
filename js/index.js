@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     //to do:
     /*
-        - Create a list where you can store each topic.
+        ✔️ - Create a list where you can store each topic.
             ex. [
                 {
                     label: string,      --> name of the topic
@@ -14,12 +14,12 @@ $(document).ready(function() {
                 }
             ]
         - To avoid Bugs:
-            - don't forget to set the maximum scroll to list.length * sizeOfScrollBlock
+        ✔️ - don't forget to set the maximum scroll to list.length * sizeOfScrollBlock
             - don't over-traverse through the list when scrolling: highlightedTopic = max(list.length-1, highlightedTopic + 1)
     */
 
 
-    const Labels = [
+    const labels = [
         {
             label: "skin",
             image_src: "./ui/images/skin.jpg",
@@ -106,6 +106,13 @@ $(document).ready(function() {
         },
     ]
 
+    const size = labels.length;
+    const scrollBlockHeight = 1048;
+    const maximumScrollPosition = (size-1) * scrollBlockHeight;
+
+    // SCROLLING LOGISTICS //
+
+    // Customized Parallax
     var lastScrollTop = 0;
     var isScrolling = false;
     $(window).scroll((event) => {
@@ -118,7 +125,7 @@ $(document).ready(function() {
         var designatedScrollPosition = lastScrollTop;
 
         if(startingScollPosition > lastScrollTop){
-                designatedScrollPosition = lastScrollTop + 1048;
+            designatedScrollPosition = Math.min(maximumScrollPosition, lastScrollTop + 1048);
         } else {
                 designatedScrollPosition = lastScrollTop - 1048;
         }
@@ -127,8 +134,36 @@ $(document).ready(function() {
         lastScrollTop = designatedScrollPosition;
     })
 
-    // scrollorama.animate('#title1',{ duration: 300, property:'zoom', end: 8 });
-    // scrollorama.animate('#title3',{ duration: 600, property:'rotate', start:180,end:360 });
-    // scrollorama.animate('#title2',{ duration: 600, property:'left', start:-800,end: 0 });
+    // RENDERING //
+
+    // Constructing the skeleton-pinning modal
+    $("#anatomy_pin_modal").append(`
+        <div id="anatomy_model" class="anatomy_model">
+            <img src="./ui/images/anatomy.png" alt="a figure of the human body anatomy with circle on top to indicate parts' positions">
+        </div>
+    `)
+    labels.forEach(topic => {
+        //First we construct the circles elements
+        const id = topic.label.replace(/\s/g, ""); //Removes all white spaces int label
+        let element = `<span id = "${id}" class="marker"></span>`;
+        $("#anatomy_model").append(`
+            ${element}
+        `);
+        //Then we edit their HTML CSS to position them as we wish
+        $(`#${id}`).css({
+            top: `${topic.yPosition}%`,
+            left: `${topic.xPosition}%`
+        })
+    });
+
+    // Constructing the Scroll-Blocks
+    labels.forEach(topic => {
+        $("#scroll_block_container").append(`
+            <div class="scrollblock" id="skin_container">
+                <div class = "filter topic_banner"></div>
+                <img class = "topic_banner" src="${topic.image_src}" alt="${topic.alt}">
+            </div>
+        `);
+    })
 
 });
