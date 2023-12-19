@@ -1,4 +1,18 @@
+// 
+
+
 $(document).ready(function() {
+    //This is where you can add new labels completely
+    /*
+        {
+            label: string,
+            image_src: string,
+            alt: string,
+            xPosition: numbers, --> this is in percentage
+            yPosition: numbers, --> this is in percentage
+        }
+    */
+   
     const labels = [
         {
             label: "skin",
@@ -87,37 +101,39 @@ $(document).ready(function() {
     ]
 
     const size = labels.length;
-    const scrollBlockHeight = 1048;
-    const maximumScrollPosition = (size-1) * scrollBlockHeight;
-    let markedPos = 0;
+    const scrollBlockHeight = 1048; //Exists to simplify the process of future rework on display
+    const maximumScrollPosition = (size-1) * scrollBlockHeight; //Used for avoiding over-scrolling
+
+    let markedPos = 0;  //Indicates which marker is marked
     let timer; //Used to avoid timeout Loops
 
     // UTILITY FUNCTIONS //
     const removeWhiteSpaces = (str) => str.replace(/\s/g, "");
 
-    // Marking and Unmarking Logic //
+    // MARKING and UNMARKING Logic //
     const markTopic = (index) => {
         if(timer){ //Prevent the user from performing too many updates at a time
             return;
         }
 
         let id = removeWhiteSpaces(labels[markedPos].label);
-        //unmark the previous markedPos
+        //unmark the previous markedPos (mark and label)
         $(`#${id}`).removeClass('marked');
         $(`#${id}_label`).removeClass('marked_label');
         
-        //update markedPos and mark the new marker
+        //update markedPos and mark the new marker & the new label
         markedPos = index;
         id = removeWhiteSpaces(labels[markedPos].label);
         $(`#${id}`).addClass('marked');
         $(`#${id}_label`).addClass('marked_label');
 
+        //sets up a target onto where the screen should scroll to
         const designatedScrollPosition = index * scrollBlockHeight;
-        console.log(index);
         
-        isScrolling = true;
+        //Scrolls smoothly onto to target set earlier
+        isScrolling = true; //To prevent scrolling loops (works as a process lock)
         $('html, body').animate({scrollTop: designatedScrollPosition}, 500);
-        timer = setTimeout(()=>{isScrolling = false; timer = null}, 550);
+        timer = setTimeout(()=>{isScrolling = false; timer = null}, 550); //Unlocks functionalities again
     }
 
     // SCROLLING LOGISTICS //
